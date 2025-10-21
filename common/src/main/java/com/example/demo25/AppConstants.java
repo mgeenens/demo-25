@@ -1,4 +1,4 @@
-package com.example;
+package com.example.demo25;
 
 public class AppConstants {
 
