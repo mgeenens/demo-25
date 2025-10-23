@@ -15,4 +15,8 @@ public class AuthorUtils {
                 entity.getLastName()
         );
     }
+
+    public static String buildAuthorFullname(AuthorEntity entity) {
+        return entity.getFirstName() + " " + entity.getLastName().toUpperCase();
+    }
 }

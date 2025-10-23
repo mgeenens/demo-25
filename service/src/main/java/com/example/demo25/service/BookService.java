@@ -23,4 +23,11 @@ public class BookService {
             .map(BookUtils::toDTO)
             .toList();
     }
+
+    public List<Book> searchBooksByTitle(String keyword) {
+        return bookRepository.findByTitleContainingIgnoreCase(keyword)
+            .stream()
+            .map(BookUtils::toDTO)
+            .toList();
+    }
 }

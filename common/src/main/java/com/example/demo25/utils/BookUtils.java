@@ -11,7 +11,7 @@ public class BookUtils {
     public static Book toDTO(BookEntity entity) {
         return new Book(entity.getId(),
             entity.getTitle(),
-            AuthorUtils.toDTO(entity.getAuthor()),
+            AuthorUtils.buildAuthorFullname(entity.getAuthor()),
             entity.getGenre(),
             DateUtils.dateToddMMyyyy(entity.getPublicationDate()));
     }
