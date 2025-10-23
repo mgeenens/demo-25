@@ -1,7 +1,7 @@
 package com.example.demo25.service;
 
 import com.example.demo25.BaseTest;
-import com.example.demo25.persistence.entity.BookEntity;
+import com.example.demo25.persistence.entity.RecipeEntity;
 import com.example.demo25.persistence.repository.BookRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
@@ -22,7 +22,7 @@ public class BookServiceTest extends BaseTest {
     @MockitoBean
     private BookRepository bookRepository;
 
-    private static List<BookEntity> bookList;
+    private static List<RecipeEntity> bookList;
 
     @BeforeAll
     static void setUp() {

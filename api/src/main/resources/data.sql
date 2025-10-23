@@ -1,29 +1,37 @@
--- USERS
-INSERT INTO USERS (U_FIRST_NAME, U_LAST_NAME, U_EMAIL, U_BIRTH_DATE, U_INSCRIPTION_DATE)
-VALUES
-    ('Alice', 'Dupont', 'alice.dupont@example.com', '1990-04-12', '2024-01-10'),
-    ('Bob', 'Martin', 'bob.martin@example.com', '1985-09-30', '2024-03-05'),
-    ('Charlie', 'Nguyen', 'charlie.nguyen@example.com', '1992-11-14', '2024-05-21');
+-- Users
+INSERT INTO USER (FIRST_NAME, LAST_NAME, EMAIL, BIRTH_DATE, INSCRIPTION_DATE)
+VALUES ('Alice', 'Smith', 'alice@example.com', '1990-05-12', '2025-01-01');
 
--- AUTHORS
-INSERT INTO AUTHOR (AU_FIRST_NAME, AU_LAST_NAME)
-VALUES
-    ('Isaac', 'Asimov'),
-    ('Agatha', 'Christie'),
-    ('J.K.', 'Rowling'),
-    ('Terry', 'Pratchett');
+INSERT INTO USER (FIRST_NAME, LAST_NAME, EMAIL, BIRTH_DATE, INSCRIPTION_DATE)
+VALUES ('Bob', 'Johnson', 'bob@example.com', '1985-08-20', '2025-02-01');
 
--- BOOKS
-INSERT INTO BOOK (BK_TITLE, BK_GENRE, BK_PUBLICATION_DATE, BK_AUTHOR_ID)
-VALUES
-    ('Foundation', 'SCIENCE_FICTION', '1951-01-01', 1),
-    ('Murder on the Orient Express', 'MYSTERY', '1934-01-01', 2),
-    ('Harry Potter and the Philosopher''s Stone', 'FANTASY', '1997-06-26', 3),
-    ('The Last Hero', 'FANTASY', '2001-06-06', 4);
+-- Products
+INSERT INTO PRODUCT (TYPE, NAME) VALUES ('VEGETABLE', 'Carrot');
+INSERT INTO PRODUCT (TYPE, NAME) VALUES ('VEGETABLE', 'Potato');
+INSERT INTO PRODUCT (TYPE, NAME) VALUES ('MEAT', 'Chicken Breast');
+INSERT INTO PRODUCT (TYPE, NAME) VALUES ('DAIRY', 'Cheese');
 
--- LOANS
-INSERT INTO LOAN (LO_USER_ID, LO_BOOK_ID, LO_LOAN_DATE, LO_RETURN_DATE)
-VALUES
-    (1, 1, '2025-09-15', NULL),
-    (2, 2, '2025-09-20', '2025-10-01'),
-    (3, 3, '2025-10-10', NULL);
+-- Recipes
+INSERT INTO RECIPE (TITLE, DESCRIPTION, PREPARATION_TIME, TYPE, PUBLICATION_DATE, USER_ID)
+VALUES ('Roasted Chicken', 'Simple roasted chicken with vegetables', 60, 'MAIN', '2025-10-23', 1);
+
+INSERT INTO RECIPE (TITLE, DESCRIPTION, PREPARATION_TIME, TYPE, PUBLICATION_DATE, USER_ID)
+VALUES ('Vegetable Soup', 'Healthy mixed vegetable soup', 30, 'STARTER', '2025-10-23', 2);
+
+-- Ingredients
+INSERT INTO INGREDIENT (QUANTITY, UNIT, RECIPE_ID, PRODUCT_ID) VALUES (1, 'kg', 1, 3); -- Chicken
+INSERT INTO INGREDIENT (QUANTITY, UNIT, RECIPE_ID, PRODUCT_ID) VALUES (2, 'pcs', 1, 1); -- Carrot
+INSERT INTO INGREDIENT (QUANTITY, UNIT, RECIPE_ID, PRODUCT_ID) VALUES (3, 'pcs', 1, 2); -- Potato
+INSERT INTO INGREDIENT (QUANTITY, UNIT, RECIPE_ID, PRODUCT_ID) VALUES (500, 'g', 1, 4); -- Cheese
+
+INSERT INTO INGREDIENT (QUANTITY, UNIT, RECIPE_ID, PRODUCT_ID) VALUES (3, 'pcs', 2, 1); -- Carrot
+INSERT INTO INGREDIENT (QUANTITY, UNIT, RECIPE_ID, PRODUCT_ID) VALUES (2, 'pcs', 2, 2); -- Potato
+
+-- Steps
+INSERT INTO STEP (DESCRIPTION, STEP_ORDER, RECIPE_ID) VALUES ('Preheat oven to 180C', 1, 1);
+INSERT INTO STEP (DESCRIPTION, STEP_ORDER, RECIPE_ID) VALUES ('Season chicken and vegetables', 2, 1);
+INSERT INTO STEP (DESCRIPTION, STEP_ORDER, RECIPE_ID) VALUES ('Roast for 45 minutes', 3, 1);
+
+INSERT INTO STEP (DESCRIPTION, STEP_ORDER, RECIPE_ID) VALUES ('Chop all vegetables', 1, 2);
+INSERT INTO STEP (DESCRIPTION, STEP_ORDER, RECIPE_ID) VALUES ('Boil water and add vegetables', 2, 2);
+INSERT INTO STEP (DESCRIPTION, STEP_ORDER, RECIPE_ID) VALUES ('Simmer for 20 minutes', 3, 2);

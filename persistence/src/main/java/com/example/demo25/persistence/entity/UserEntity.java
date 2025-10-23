@@ -20,25 +20,25 @@ public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "U_ID")
+    @Column(name = "ID")
     private Long id;
 
-    @Column(name = "U_FIRST_NAME", nullable = false)
+    @Column(name = "FIRST_NAME", length = 100, nullable = false)
     private String firstName;
 
-    @Column(name = "U_LAST_NAME", length = 100, nullable = false)
+    @Column(name = "LAST_NAME", length = 100, nullable = false)
     private String lastName;
 
-    @Column(name = "U_EMAIL", length = 150, nullable = false, unique = true)
+    @Column(name = "EMAIL", length = 150, nullable = false, unique = true)
     private String email;
 
-    @Column(name = "U_BIRTH_DATE")
+    @Column(name = "BIRTH_DATE")
     private LocalDate birthDate;
 
-    @Column(name = "U_INSCRIPTION_DATE")
+    @Column(name = "INSCRIPTION_DATE")
     private LocalDate inscriptionDate;
 
-    @OneToMany(mappedBy = "borrower", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<LoanEntity> loans = new ArrayList<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RecipeEntity> recipes = new ArrayList<>();
 
 }

@@ -1,14 +1,14 @@
 package com.example.demo25.persistence.repository;
 
-import com.example.demo25.domain.enums.Genre;
-import com.example.demo25.persistence.entity.BookEntity;
+import com.example.demo25.domain.enums.RecipeType;
+import com.example.demo25.persistence.entity.RecipeEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface BookRepository extends JpaRepository<BookEntity, Long> {
+public interface BookRepository extends JpaRepository<RecipeEntity, Long> {
 
-    List<BookEntity> findByTitleContainingIgnoreCase(String title);
+    List<RecipeEntity> findByTitleContainingIgnoreCase(String title);
 
-    List<BookEntity> findByGenre(Genre genre);
+    List<RecipeEntity> findByGenre(RecipeType recipeType);
 }
