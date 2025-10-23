@@ -1,4 +1,4 @@
-package com.example.demo25.domain.enums;
+package com.example.demo25.persistence.enums;
 
 public enum IngredientType {
     VEGETABLE("Légume"),

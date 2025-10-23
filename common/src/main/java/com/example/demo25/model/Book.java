@@ -1,4 +1,4 @@
-package com.example.demo25.domain.model;
+package com.example.demo25.model;
 
 import com.example.demo25.domain.enums.RecipeType;
 

@@ -1,4 +1,4 @@
-package com.example.demo25.domain.enums;
+package com.example.demo25.persistence.enums;
 
 public enum Unit {
     // TODO: improve with unit type (weight, volume, count, etc.)

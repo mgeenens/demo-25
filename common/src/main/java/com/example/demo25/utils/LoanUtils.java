@@ -1,6 +1,6 @@
 package com.example.demo25.utils;
 
-import com.example.demo25.domain.model.Loan;
+import com.example.demo25.model.Loan;
 
 public class LoanUtils {
 

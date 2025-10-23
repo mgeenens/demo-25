@@ -1,6 +1,6 @@
 package com.example.demo25.service;
 
-import com.example.demo25.domain.model.Book;
+import com.example.demo25.model.Book;
 import com.example.demo25.persistence.repository.BookRepository;
 import com.example.demo25.utils.BookUtils;
 import org.springframework.beans.factory.annotation.Autowired;

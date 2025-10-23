@@ -1,6 +1,6 @@
 package com.example.demo25.persistence.entity;
 
-import com.example.demo25.domain.enums.RecipeType;
+import com.example.demo25.persistence.enums.RecipeType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

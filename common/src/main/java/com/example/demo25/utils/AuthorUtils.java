@@ -1,6 +1,6 @@
 package com.example.demo25.utils;
 
-import com.example.demo25.domain.model.Author;
+import com.example.demo25.model.Author;
 
 public class AuthorUtils {
 

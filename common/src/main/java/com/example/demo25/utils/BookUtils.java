@@ -1,6 +1,6 @@
 package com.example.demo25.utils;
 
-import com.example.demo25.domain.model.Book;
+import com.example.demo25.model.Book;
 import com.example.demo25.persistence.entity.RecipeEntity;
 
 public class BookUtils {
