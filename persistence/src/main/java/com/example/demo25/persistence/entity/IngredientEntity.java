@@ -1,11 +1,11 @@
 package com.example.demo25.persistence.entity;
 
-import com.example.demo25.persistence.enums.Unit;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import com.example.demo25.persistence.enums.Unit;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "INGREDIENT")
