@@ -5,7 +5,7 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public enum Unit implements IndexedEnum<Unit>{
+public enum Unit {
     // TODO: improve with unit type (weight, volume, count, etc.)
     GRAM("g", "Gramme"),
     KILOGRAM("kg", "Kilogramme"),
@@ -24,8 +24,15 @@ public enum Unit implements IndexedEnum<Unit>{
         this.fullName = fullName;
     }
 
-    @Override
-    public List<Unit> valuesList() {
+    public static List<Unit> valuesList() {
         return List.of(Unit.values());
+    }
+
+    public static Unit getByIndex(int index) {
+        List<Unit> list = valuesList();
+        if (index < 0 || index >= list.size()) {
+            throw new IndexOutOfBoundsException("Index " + index + " out of bounds for enum " + list);
+        }
+        return list.get(index);
     }
 }

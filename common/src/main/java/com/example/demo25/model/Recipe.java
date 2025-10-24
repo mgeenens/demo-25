@@ -10,7 +10,7 @@ public record Recipe(Long id,
                      String description,
                      Integer preparationTime,
                      RecipeType recipeType,
-                     LocalDate publicationDate,
+                     String publicationDate,
                      User user,
                      List<Ingredient> ingredientList,
                      List<Step> stepList) {

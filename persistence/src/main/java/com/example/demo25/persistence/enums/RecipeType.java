@@ -5,7 +5,7 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public enum RecipeType implements IndexedEnum<RecipeType> {
+public enum RecipeType {
     ENTRY("Entrée"),
     MAIN_COURSE("Plat principal"),
     DESSERT("Dessert"),
@@ -20,8 +20,15 @@ public enum RecipeType implements IndexedEnum<RecipeType> {
         this.typeName = type;
     }
 
-    @Override
-    public List<RecipeType> valuesList() {
+    public static List<RecipeType> valuesList() {
         return List.of(RecipeType.values());
+    }
+
+    public static RecipeType getByIndex(int index) {
+        List<RecipeType> list = valuesList();
+        if (index < 0 || index >= list.size()) {
+            throw new IndexOutOfBoundsException("Index " + index + " out of bounds for enum " + list);
+        }
+        return list.get(index);
     }
 }
