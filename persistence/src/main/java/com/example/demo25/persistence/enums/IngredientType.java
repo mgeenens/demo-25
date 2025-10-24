@@ -1,6 +1,11 @@
 package com.example.demo25.persistence.enums;
 
-public enum IngredientType {
+import lombok.Getter;
+
+import java.util.List;
+
+@Getter
+public enum IngredientType implements IndexedEnum<IngredientType> {
     VEGETABLE("Légume"),
     FRUIT("Fruit"),
     MEAT("Viande"),
@@ -16,7 +21,8 @@ public enum IngredientType {
         this.typeName = type;
     }
 
-    public String getTypeName() {
-        return typeName;
+    @Override
+    public List<IngredientType> valuesList() {
+        return List.of(IngredientType.values());
     }
 }

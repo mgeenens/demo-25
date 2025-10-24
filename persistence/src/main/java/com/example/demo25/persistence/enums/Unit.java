@@ -1,6 +1,11 @@
 package com.example.demo25.persistence.enums;
 
-public enum Unit {
+import lombok.Getter;
+
+import java.util.List;
+
+@Getter
+public enum Unit implements IndexedEnum<Unit>{
     // TODO: improve with unit type (weight, volume, count, etc.)
     GRAM("g", "Gramme"),
     KILOGRAM("kg", "Kilogramme"),
@@ -19,12 +24,8 @@ public enum Unit {
         this.fullName = fullName;
     }
 
-    public String getShortName() {
-        return shortName;
+    @Override
+    public List<Unit> valuesList() {
+        return List.of(Unit.values());
     }
-
-    public String getFullName() {
-        return fullName;
-    }
-
 }

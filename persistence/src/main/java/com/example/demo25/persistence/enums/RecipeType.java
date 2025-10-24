@@ -1,6 +1,11 @@
 package com.example.demo25.persistence.enums;
 
-public enum RecipeType {
+import lombok.Getter;
+
+import java.util.List;
+
+@Getter
+public enum RecipeType implements IndexedEnum<RecipeType> {
     ENTRY("Entrée"),
     MAIN_COURSE("Plat principal"),
     DESSERT("Dessert"),
@@ -15,7 +20,8 @@ public enum RecipeType {
         this.typeName = type;
     }
 
-    public String getTypeName() {
-        return typeName;
+    @Override
+    public List<RecipeType> valuesList() {
+        return List.of(RecipeType.values());
     }
 }
