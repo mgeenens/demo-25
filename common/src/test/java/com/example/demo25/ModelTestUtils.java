@@ -143,7 +143,7 @@ public class ModelTestUtils {
             RecipeType.getByIndex(ordinal.intValue() - 1),
             DateUtils.formatLocalDate(LocalDate.now().minusDays(10 * ordinal)),
             buildUser(ordinal),
-            buildIngredientList(3),
-            buildStepList(3));
+            buildIngredientList(5),
+            buildStepList(5));
     }
 }

@@ -138,6 +138,21 @@ public class EntityTestUtils {
     }
 
     /**
+     * Builds a list of IngredientEntity instances for testing purposes.
+     *
+     * @param count the number of IngredientEntity instances to create
+     * @return List of IngredientEntity instances
+     */
+    public static List<IngredientEntity> buildIngredientEntityList(int count) {
+        if (count > Unit.values().length) {
+            count = Unit.values().length;
+        }
+        return LongStream.rangeClosed(1, count)
+            .mapToObj(EntityTestUtils::buildIngredientEntity)
+            .toList();
+    }
+
+    /**
      * Builds a RecipeEntity instance for testing purposes.
      * <ul>
      *     <li>Id: ordinal</li>
