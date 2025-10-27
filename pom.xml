@@ -10,11 +10,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>demo-25</artifactId>
+	<artifactId>hmrback</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>demo-25</name>
-	<description>Demo project for Spring Boot</description>
+	<name>hmrback</name>
+	<description>Home Made Recipes Backend</description>
 
 	<modules>
 		<module>persistence</module>
