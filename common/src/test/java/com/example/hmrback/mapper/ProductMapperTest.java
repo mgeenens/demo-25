@@ -1,7 +1,7 @@
 package com.example.hmrback.mapper;
 
-import com.example.hmrback.EntityTestUtils;
-import com.example.hmrback.ModelTestUtils;
+import com.example.hmrback.utils.EntityTestUtils;
+import com.example.hmrback.utils.ModelTestUtils;
 import com.example.hmrback.model.Product;
 import com.example.hmrback.persistence.entity.ProductEntity;
 import com.example.hmrback.persistence.enums.IngredientType;
@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static com.example.hmrback.TestConstants.NUMBER_1;
-import static com.example.hmrback.TestConstants.PRODUCT_NAME;
+import static com.example.hmrback.utils.TestConstants.NUMBER_1;
+import static com.example.hmrback.utils.TestConstants.PRODUCT_NAME;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 

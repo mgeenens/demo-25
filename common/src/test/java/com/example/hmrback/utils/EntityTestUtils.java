@@ -1,4 +1,4 @@
-package com.example.hmrback;
+package com.example.hmrback.utils;
 
 import com.example.hmrback.persistence.entity.*;
 import com.example.hmrback.persistence.enums.IngredientType;
@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.LongStream;
 
-import static com.example.hmrback.TestConstants.*;
+import static com.example.hmrback.utils.TestConstants.*;
 
 public class EntityTestUtils {
 

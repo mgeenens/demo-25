@@ -1,16 +1,15 @@
-package com.example.hmrback;
+package com.example.hmrback.utils;
 
 import com.example.hmrback.model.*;
 import com.example.hmrback.persistence.enums.IngredientType;
 import com.example.hmrback.persistence.enums.RecipeType;
 import com.example.hmrback.persistence.enums.Unit;
-import com.example.hmrback.utils.DateUtils;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.LongStream;
 
-import static com.example.hmrback.TestConstants.*;
+import static com.example.hmrback.utils.TestConstants.*;
 
 public class ModelTestUtils {
 
