@@ -17,8 +17,8 @@
 	<description>Demo project for Spring Boot</description>
 
 	<modules>
-		<module>common</module>
 		<module>persistence</module>
+		<module>common</module>
 		<module>service</module>
 		<module>api</module>
 	</modules>
@@ -116,7 +116,12 @@
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-maven-plugin</artifactId>
 					<configuration>
-						<mainClass>com.example.api.demo25.Demo25Application</mainClass>
+						<excludes>
+							<exclude>
+								<groupId>org.projectlombok</groupId>
+								<artifactId>lombok</artifactId>
+							</exclude>
+						</excludes>
 					</configuration>
 				</plugin>
 			</plugins>
