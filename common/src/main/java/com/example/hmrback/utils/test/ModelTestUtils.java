@@ -1,15 +1,16 @@
-package com.example.hmrback.utils;
+package com.example.hmrback.utils.test;
 
 import com.example.hmrback.model.*;
 import com.example.hmrback.persistence.enums.IngredientType;
 import com.example.hmrback.persistence.enums.RecipeType;
 import com.example.hmrback.persistence.enums.Unit;
+import com.example.hmrback.utils.DateUtils;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.LongStream;
 
-import static com.example.hmrback.utils.TestConstants.*;
+import static com.example.hmrback.utils.test.TestConstants.*;
 
 public class ModelTestUtils {
 
@@ -134,8 +135,8 @@ public class ModelTestUtils {
         return LongStream.rangeClosed(1L, count).mapToObj(ModelTestUtils::buildIngredient).toList();
     }
 
-    public static Recipe buildRecipe(Long ordinal) {
-        return new Recipe(ordinal,
+    public static Recipe buildRecipe(Long ordinal, boolean isCreation) {
+        return new Recipe(isCreation ? null :ordinal,
             RECIPE_TITLE.formatted(ordinal),
             RECIPE_DESCRIPTION.formatted(ordinal),
             ordinal.intValue() * 40,

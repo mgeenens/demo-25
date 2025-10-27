@@ -1,7 +1,7 @@
 package com.example.hmrback.mapper;
 
-import com.example.hmrback.utils.EntityTestUtils;
-import com.example.hmrback.utils.ModelTestUtils;
+import com.example.hmrback.utils.test.EntityTestUtils;
+import com.example.hmrback.utils.test.ModelTestUtils;
 import com.example.hmrback.mapper.utils.DateMapperImpl;
 import com.example.hmrback.model.Recipe;
 import com.example.hmrback.persistence.entity.RecipeEntity;
@@ -12,9 +12,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static com.example.hmrback.utils.TestConstants.NUMBER_1;
-import static com.example.hmrback.utils.TestConstants.RECIPE_DESCRIPTION;
-import static com.example.hmrback.utils.TestConstants.RECIPE_TITLE;
+import static com.example.hmrback.utils.test.TestConstants.NUMBER_1;
+import static com.example.hmrback.utils.test.TestConstants.RECIPE_DESCRIPTION;
+import static com.example.hmrback.utils.test.TestConstants.RECIPE_TITLE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -38,7 +38,7 @@ public class RecipeMapperTest {
     @BeforeAll
     static void setUp() {
         // Initialize test data for Recipe and RecipeEntity
-        model = ModelTestUtils.buildRecipe(NUMBER_1);
+        model = ModelTestUtils.buildRecipe(NUMBER_1, false);
 
         entity = EntityTestUtils.buildRecipeEntity(NUMBER_1);
         entity.setIngredientList(EntityTestUtils.buildIngredientEntityList(5));

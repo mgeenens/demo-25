@@ -1,20 +1,20 @@
 package com.example.hmrback.mapper;
 
-import com.example.hmrback.utils.EntityTestUtils;
-import com.example.hmrback.utils.ModelTestUtils;
 import com.example.hmrback.mapper.utils.DateMapperImpl;
 import com.example.hmrback.model.User;
 import com.example.hmrback.persistence.entity.UserEntity;
+import com.example.hmrback.utils.test.EntityTestUtils;
+import com.example.hmrback.utils.test.ModelTestUtils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static com.example.hmrback.utils.TestConstants.EMAIL;
-import static com.example.hmrback.utils.TestConstants.FIRST_NAME;
-import static com.example.hmrback.utils.TestConstants.LAST_NAME;
-import static com.example.hmrback.utils.TestConstants.NUMBER_1;
+import static com.example.hmrback.utils.test.TestConstants.EMAIL;
+import static com.example.hmrback.utils.test.TestConstants.FIRST_NAME;
+import static com.example.hmrback.utils.test.TestConstants.LAST_NAME;
+import static com.example.hmrback.utils.test.TestConstants.NUMBER_1;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 

@@ -1,4 +1,4 @@
-package com.example.hmrback.utils;
+package com.example.hmrback.utils.test;
 
 public class TestConstants {
 
