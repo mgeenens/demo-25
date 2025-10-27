@@ -1,0 +1,53 @@
+# ------------------------
+# Java
+# ------------------------
+*.class
+*.log
+*.ctxt
+*.jar
+*.war
+*.ear
+*.iml
+*.iws
+
+# ------------------------
+# Maven
+# ------------------------
+target/
+!.mvn/wrapper/maven-wrapper.jar
+.mvn/timing.properties
+
+# ------------------------
+# IntelliJ IDEA
+# ------------------------
+.idea/
+*.ipr
+out/
+
+# ------------------------
+# Logs and Temp
+# ------------------------
+logs/
+tmp/
+temp/
+
+# ------------------------
+# Test reports / coverage
+# ------------------------
+test-output/
+jacoco.exec
+coverage/
+*.lcov
+
+# ------------------------
+# Spring Boot specific
+# ------------------------
+spring.log
+
+# ------------------------
+# Environment / secrets
+# ------------------------
+.env
+.env.*
+*.keystore
+*.p12
