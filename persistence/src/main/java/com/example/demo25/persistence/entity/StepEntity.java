@@ -23,7 +23,7 @@ public class StepEntity {
     private String description;
 
     @Column(name = "ORDER", nullable = false)
-    private int order;
+    private Integer order;
 
     @ManyToOne
     @JoinColumn(name = "RECIPE_ID", nullable = false)

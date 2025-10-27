@@ -2,6 +2,7 @@ package com.example.demo25.mapper;
 
 import com.example.demo25.EntityTestUtils;
 import com.example.demo25.ModelTestUtils;
+import com.example.demo25.mapper.utils.DateMapperImpl;
 import com.example.demo25.model.Recipe;
 import com.example.demo25.persistence.entity.RecipeEntity;
 import com.example.demo25.persistence.enums.RecipeType;
@@ -23,31 +24,32 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
     UserMapperImpl.class,
     IngredientMapperImpl.class,
     ProductMapperImpl.class,
-    StepMapperImpl.class
+    StepMapperImpl.class,
+    DateMapperImpl.class
 })
 public class RecipeMapperTest {
 
     @Autowired
     private RecipeMapper mapper;
 
-    private static Recipe recipe;
-    private static RecipeEntity recipeEntity;
+    private static Recipe model;
+    private static RecipeEntity entity;
 
     @BeforeAll
     static void setUp() {
         // Initialize test data for Recipe and RecipeEntity
-        recipe = ModelTestUtils.buildRecipe(NUMBER_1);
+        model = ModelTestUtils.buildRecipe(NUMBER_1);
 
-        recipeEntity = EntityTestUtils.buildRecipeEntity(NUMBER_1);
-        recipeEntity.setIngredientList(EntityTestUtils.buildIngredientEntityList(5));
-        recipeEntity.setStepList(EntityTestUtils.buildStepEntityList(5));
-        recipeEntity.setUser(EntityTestUtils.buildUserEntity(NUMBER_1));
+        entity = EntityTestUtils.buildRecipeEntity(NUMBER_1);
+        entity.setIngredientList(EntityTestUtils.buildIngredientEntityList(5));
+        entity.setStepList(EntityTestUtils.buildStepEntityList(5));
+        entity.setUser(EntityTestUtils.buildUserEntity(NUMBER_1));
     }
 
     @Test
     @Order(1)
     void shouldMapEntityToModel() {
-        Recipe result = mapper.toModel(recipeEntity);
+        Recipe result = mapper.toModel(entity);
 
         assertNotNull(result);
         assertEquals(NUMBER_1, result.id());
@@ -60,5 +62,23 @@ public class RecipeMapperTest {
         assertNotNull(result.stepList());
         assertFalse(result.stepList().isEmpty());
         assertEquals(40, result.preparationTime());
+    }
+
+    @Test
+    @Order(2)
+    void shouldMapModelToEntity() {
+        RecipeEntity result = mapper.toEntity(model);
+
+        assertNotNull(result);
+        assertEquals(NUMBER_1, result.getId());
+        assertEquals(RECIPE_TITLE.formatted(NUMBER_1), result.getTitle());
+        assertEquals(RECIPE_DESCRIPTION.formatted(NUMBER_1), result.getDescription());
+        assertEquals(RecipeType.ENTRY, result.getRecipeType());
+        assertNotNull(result.getUser());
+        assertNotNull(result.getIngredientList());
+        assertFalse(result.getIngredientList().isEmpty());
+        assertNotNull(result.getStepList());
+        assertFalse(result.getStepList().isEmpty());
+        assertEquals(40, result.getPreparationTime());
     }
 }

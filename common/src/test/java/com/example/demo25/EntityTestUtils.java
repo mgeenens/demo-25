@@ -134,6 +134,7 @@ public class EntityTestUtils {
         ingredientEntity.setId(ordinal);
         ingredientEntity.setQuantity(ordinal.doubleValue() * 10);
         ingredientEntity.setUnit(Unit.getByIndex(ordinal.intValue() - 1));
+        ingredientEntity.setProduct(buildProductEntity(ordinal));
         return ingredientEntity;
     }
 

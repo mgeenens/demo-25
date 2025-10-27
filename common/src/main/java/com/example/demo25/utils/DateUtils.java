@@ -13,10 +13,10 @@ public class DateUtils {
     }
 
     public static LocalDate parseLocalDate(String date) {
-        return LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT));
+        return date != null ? LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT)) : null;
     }
 
     public static String formatLocalDate(LocalDate localDate) {
-        return localDate.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+        return localDate != null ? localDate.format(DateTimeFormatter.ofPattern(DATE_FORMAT)) : null;
     }
 }
