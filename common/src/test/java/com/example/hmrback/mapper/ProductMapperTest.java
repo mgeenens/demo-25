@@ -1,5 +1,6 @@
 package com.example.hmrback.mapper;
 
+import com.example.hmrback.BaseTU;
 import com.example.hmrback.model.Product;
 import com.example.hmrback.persistence.entity.ProductEntity;
 import com.example.hmrback.persistence.enums.IngredientType;
@@ -17,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(classes = { ProductMapperImpl.class })
-public class ProductMapperTest {
+class ProductMapperTest extends BaseTU {
 
     @Autowired
     private ProductMapper mapper;

@@ -1,5 +1,6 @@
 package com.example.hmrback.mapper;
 
+import com.example.hmrback.BaseTU;
 import com.example.hmrback.utils.test.EntityTestUtils;
 import com.example.hmrback.utils.test.ModelTestUtils;
 import com.example.hmrback.mapper.utils.DateMapperImpl;
@@ -27,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
     StepMapperImpl.class,
     DateMapperImpl.class
 })
-public class RecipeMapperTest {
+class RecipeMapperTest extends BaseTU {
 
     @Autowired
     private RecipeMapper mapper;

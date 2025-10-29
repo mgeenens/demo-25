@@ -1,6 +1,6 @@
 package com.example.hmrback.service;
 
-import com.example.hmrback.BaseTest;
+import com.example.hmrback.BaseTU;
 import com.example.hmrback.persistence.entity.RecipeEntity;
 import com.example.hmrback.utils.test.EntityTestUtils;
 import com.example.hmrback.utils.test.ModelTestUtils;
@@ -22,7 +22,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(classes = RecipeService.class)
-public class RecipeServiceTest extends BaseTest {
+class RecipeServiceTest extends BaseTU {
 
     @Autowired
     private RecipeService service;

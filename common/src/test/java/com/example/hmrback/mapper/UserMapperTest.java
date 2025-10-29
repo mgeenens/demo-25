@@ -1,5 +1,6 @@
 package com.example.hmrback.mapper;
 
+import com.example.hmrback.BaseTU;
 import com.example.hmrback.mapper.utils.DateMapperImpl;
 import com.example.hmrback.model.User;
 import com.example.hmrback.persistence.entity.UserEntity;
@@ -22,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
     UserMapperImpl.class,
     DateMapperImpl.class
 })
-public class UserMapperTest {
+class UserMapperTest extends BaseTU {
 
     @Autowired
     private UserMapper mapper;

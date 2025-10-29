@@ -1,5 +1,6 @@
 package com.example.hmrback.api.controller;
 
+import com.example.hmrback.constant.ControllerConstants;
 import com.example.hmrback.model.Recipe;
 import com.example.hmrback.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.example.hmrback.constant.ControllerConstants.BASE_PATH;
+import static com.example.hmrback.constant.ControllerConstants.RECIPES;
+
 @RestController
-@RequestMapping("/recipes")
-public class RecipeController extends BaseController {
+@RequestMapping(BASE_PATH + RECIPES)
+public class RecipeController {
 
     private final RecipeService recipeService;
 

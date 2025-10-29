@@ -1,5 +1,6 @@
 package com.example.hmrback.mapper;
 
+import com.example.hmrback.BaseTU;
 import com.example.hmrback.utils.test.EntityTestUtils;
 import com.example.hmrback.utils.test.ModelTestUtils;
 import com.example.hmrback.model.Step;
@@ -16,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(classes = { StepMapperImpl.class })
-public class StepMapperTest {
+class StepMapperTest extends BaseTU {
 
     @Autowired
     private StepMapper mapper;

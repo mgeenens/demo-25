@@ -1,4 +1,4 @@
-package com.example.hmrback;
+package com.example.hmrback.constant;
 
 public class AppConstants {
 

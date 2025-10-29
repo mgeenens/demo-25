@@ -1,5 +1,6 @@
 package com.example.hmrback.mapper;
 
+import com.example.hmrback.BaseTU;
 import com.example.hmrback.utils.test.EntityTestUtils;
 import com.example.hmrback.utils.test.ModelTestUtils;
 import com.example.hmrback.model.Ingredient;
@@ -19,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
     IngredientMapperImpl.class,
     ProductMapperImpl.class
 })
-public class IngredientMapperTest {
+class IngredientMapperTest extends BaseTU {
 
     @Autowired
     private IngredientMapper mapper;
