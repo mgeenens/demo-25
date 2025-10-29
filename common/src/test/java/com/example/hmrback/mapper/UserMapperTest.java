@@ -12,10 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static com.example.hmrback.utils.test.TestConstants.EMAIL;
-import static com.example.hmrback.utils.test.TestConstants.FIRST_NAME;
-import static com.example.hmrback.utils.test.TestConstants.LAST_NAME;
-import static com.example.hmrback.utils.test.TestConstants.NUMBER_1;
+import static com.example.hmrback.utils.test.TestConstants.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -48,6 +45,7 @@ class UserMapperTest extends BaseTU {
         assertEquals(NUMBER_1, result.id());
         assertEquals(FIRST_NAME.formatted(NUMBER_1), result.firstName());
         assertEquals(LAST_NAME.formatted(NUMBER_1), result.lastName());
+        assertEquals(USERNAME.formatted(NUMBER_1), result.username());
         assertEquals(EMAIL.formatted(NUMBER_1), result.email());
     }
 
@@ -60,6 +58,7 @@ class UserMapperTest extends BaseTU {
         assertEquals(NUMBER_1, result.getId());
         assertEquals(FIRST_NAME.formatted(NUMBER_1), result.getFirstName());
         assertEquals(LAST_NAME.formatted(NUMBER_1), result.getLastName());
+        assertEquals(USERNAME.formatted(NUMBER_1), result.getUsername());
         assertEquals(EMAIL.formatted(NUMBER_1), result.getEmail());
     }
 }

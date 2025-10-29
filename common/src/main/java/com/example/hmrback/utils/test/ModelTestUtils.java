@@ -35,6 +35,7 @@ public class ModelTestUtils {
         return new User(ordinal,
             FIRST_NAME.formatted(ordinal),
             LAST_NAME.formatted(ordinal),
+            USERNAME.formatted(ordinal),
             EMAIL.formatted(ordinal),
             DateUtils.formatLocalDate(LocalDate.now().minusYears(10 * ordinal)),
             DateUtils.formatLocalDate(LocalDate.now().minusMonths(ordinal)));
