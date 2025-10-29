@@ -60,4 +60,20 @@ class RecipeServiceTest extends BaseTU {
         verify(mapper, times(1)).toModel(recipeEntity);
     }
 
+    @Test
+    @Order(2)
+    void shouldSearchRecipe() { // TODO
+        when(repository.save(any(RecipeEntity.class))).thenReturn(recipeEntity);
+        when(mapper.toEntity(any(Recipe.class))).thenReturn(recipeEntity);
+        when(mapper.toModel(any(RecipeEntity.class))).thenReturn(recipe);
+
+        Recipe result = service.createRecipe(recipe);
+
+        assertNotNull(result);
+
+        verify(repository, times(1)).save(any(RecipeEntity.class));
+        verify(mapper, times(1)).toEntity(recipe);
+        verify(mapper, times(1)).toModel(recipeEntity);
+    }
+
 }

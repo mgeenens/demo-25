@@ -41,7 +41,7 @@ public class UserEntity {
     @Column(name = "INSCRIPTION_DATE")
     private LocalDate inscriptionDate;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RecipeEntity> recipes = new ArrayList<>();
 
 }

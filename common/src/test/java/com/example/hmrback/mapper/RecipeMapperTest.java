@@ -44,7 +44,7 @@ class RecipeMapperTest extends BaseTU {
         entity = EntityTestUtils.buildRecipeEntity(NUMBER_1);
         entity.setIngredientList(EntityTestUtils.buildIngredientEntityList(5));
         entity.setStepList(EntityTestUtils.buildStepEntityList(5));
-        entity.setUser(EntityTestUtils.buildUserEntity(NUMBER_1));
+        entity.setAuthor(EntityTestUtils.buildUserEntity(NUMBER_1));
     }
 
     @Test
@@ -57,7 +57,7 @@ class RecipeMapperTest extends BaseTU {
         assertEquals(RECIPE_TITLE.formatted(NUMBER_1), result.title());
         assertEquals(RECIPE_DESCRIPTION.formatted(NUMBER_1), result.description());
         assertEquals(RecipeType.ENTRY, result.recipeType());
-        assertNotNull(result.user());
+        assertNotNull(result.author());
         assertNotNull(result.ingredientList());
         assertFalse(result.ingredientList().isEmpty());
         assertNotNull(result.stepList());
@@ -75,7 +75,7 @@ class RecipeMapperTest extends BaseTU {
         assertEquals(RECIPE_TITLE.formatted(NUMBER_1), result.getTitle());
         assertEquals(RECIPE_DESCRIPTION.formatted(NUMBER_1), result.getDescription());
         assertEquals(RecipeType.ENTRY, result.getRecipeType());
-        assertNotNull(result.getUser());
+        assertNotNull(result.getAuthor());
         assertNotNull(result.getIngredientList());
         assertFalse(result.getIngredientList().isEmpty());
         assertNotNull(result.getStepList());

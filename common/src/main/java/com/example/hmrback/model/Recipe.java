@@ -14,7 +14,7 @@ public record Recipe(Long id,
                      RecipeType recipeType,
                      @JsonProperty("publication_date")
                      String publicationDate,
-                     User user,
+                     User author,
                      @JsonProperty("ingredient_list")
                      List<Ingredient> ingredientList,
                      @JsonProperty("step_list")

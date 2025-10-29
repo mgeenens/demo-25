@@ -47,5 +47,5 @@ public class RecipeEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID", nullable = false)
-    private UserEntity user;
+    private UserEntity author;
 }

@@ -1,8 +1,7 @@
 package com.example.hmrback.api.controller;
 
-import com.example.hmrback.constant.ControllerConstants;
 import com.example.hmrback.model.Recipe;
-import com.example.hmrback.model.request.RecipeFilterRequest;
+import com.example.hmrback.model.request.RecipeFilter;
 import com.example.hmrback.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,7 +28,7 @@ public class RecipeController {
         return ResponseEntity.ok(this.recipeService.createRecipe(recipe));
     }
     @GetMapping("/recipes")
-    public ResponseEntity<Page<Recipe>> searchRecipes(RecipeFilterRequest filter, Pageable pageable) {
+    public ResponseEntity<Page<Recipe>> searchRecipes(RecipeFilter filter, Pageable pageable) {
         Page<Recipe> result = this.recipeService.searchRecipes(filter, pageable);
 
         if (result.isEmpty()) {
