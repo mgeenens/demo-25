@@ -1,5 +1,7 @@
 package com.example.hmrback.utils;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -11,7 +13,7 @@ public class DateUtils {
     }
 
     public static LocalDate parseLocalDate(String date) {
-        return date != null ? LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT)) : null;
+        return StringUtils.isNotBlank(date) ? LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT)) : null;
     }
 
     public static String formatLocalDate(LocalDate localDate) {
