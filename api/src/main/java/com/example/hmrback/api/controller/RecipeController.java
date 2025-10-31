@@ -41,4 +41,9 @@ public class RecipeController {
             .header("X-Total-Count", String.valueOf(result.getTotalElements()))
             .body(result);
     }
+
+    @PutMapping
+    public ResponseEntity<Recipe> updateRecipe(@Valid @RequestBody Recipe recipe) {
+        return ResponseEntity.ok(this.recipeService.updateRecipe(recipe));
+    }
 }

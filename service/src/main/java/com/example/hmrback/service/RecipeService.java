@@ -6,6 +6,7 @@ import com.example.hmrback.model.request.RecipeFilter;
 import com.example.hmrback.persistence.entity.RecipeEntity;
 import com.example.hmrback.persistence.repository.RecipeRepository;
 import com.example.hmrback.predicate.factory.RecipePredicateFactory;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,8 +34,15 @@ public class RecipeService {
 
     public Page<Recipe> searchRecipes(RecipeFilter filter, Pageable pageable) {
         if (filter != null) {
-            return recipeRepository.findAll(RecipePredicateFactory.fromFilters(filter), pageable).map(recipeMapper::toModel);
+            return recipeRepository.findAll(RecipePredicateFactory.fromFilters(filter), pageable)
+                .map(recipeMapper::toModel);
         }
         return Page.empty();
+    }
+
+    public Recipe updateRecipe(
+        @Valid
+        Recipe recipe) {
+        return recipeMapper.toModel(recipeRepository.saveAndFlush(recipeMapper.toEntity(recipe)));
     }
 }
