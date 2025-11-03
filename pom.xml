@@ -21,6 +21,7 @@
 		<module>common</module>
 		<module>service</module>
 		<module>api</module>
+		<module>app</module>
 	</modules>
 
 	<properties>

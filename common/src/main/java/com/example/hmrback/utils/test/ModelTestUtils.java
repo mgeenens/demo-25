@@ -7,6 +7,7 @@ import com.example.hmrback.persistence.enums.Unit;
 import com.example.hmrback.utils.DateUtils;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.LongStream;
 
@@ -38,7 +39,8 @@ public class ModelTestUtils {
             USERNAME.formatted(ordinal),
             EMAIL.formatted(ordinal),
             DateUtils.formatLocalDate(LocalDate.now().minusYears(10 * ordinal)),
-            DateUtils.formatLocalDate(LocalDate.now().minusMonths(ordinal)));
+            DateUtils.formatLocalDate(LocalDate.now().minusMonths(ordinal)),
+            new HashSet<>());
     }
 
     /**

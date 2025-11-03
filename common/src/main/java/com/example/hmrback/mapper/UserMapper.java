@@ -10,8 +10,10 @@ import org.mapstruct.Mapping;
 
 @Mapper(
     config = GlobalMapperConfig.class,
-    uses = DateMapper.class
-)
+    uses = {
+        DateMapper.class,
+        RoleMapper.class
+    })
 public interface UserMapper extends BaseMapper<User, UserEntity> {
 
     @Override

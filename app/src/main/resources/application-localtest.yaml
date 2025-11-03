@@ -1,0 +1,4 @@
+app:
+  jwt:
+    secret: blahblah
+    expiration-minutes: 60

@@ -8,4 +8,6 @@ public class ControllerConstants {
     public static final String BASE_PATH = "/hmr/api";
 
     public static final String RECIPES = "/recipes";
+
+    public static final String AUTH = "/auth";
 }
