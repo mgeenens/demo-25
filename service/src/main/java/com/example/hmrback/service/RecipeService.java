@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 public class RecipeService {
@@ -40,9 +43,19 @@ public class RecipeService {
         return Page.empty();
     }
 
+    @Transactional
     public Recipe updateRecipe(
         @Valid
         Recipe recipe) {
+        // TODO: control the user that makes the request
         return recipeMapper.toModel(recipeRepository.saveAndFlush(recipeMapper.toEntity(recipe)));
+    }
+
+    @Transactional
+    public void deleteRecipe(Long id) {
+        Optional<RecipeEntity> recipeEntity = recipeRepository.findById(id);
+
+        // TODO: control the user that makes the request
+        recipeEntity.ifPresent(recipeRepository::delete);
     }
 }
