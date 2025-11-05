@@ -1,13 +1,14 @@
 package com.example.hmrback.auth.service;
 
+import com.example.hmrback.auth.util.JwtUtils;
+import com.example.hmrback.persistence.entity.UserEntity;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.security.Key;
+import javax.crypto.SecretKey;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
@@ -23,14 +24,15 @@ public class JwtService {
     @Value("${app.jwt.expiration-minutes}")
     private Long expirationMinutes;
 
-    private Key getSigningKey() {
+    private SecretKey getSigningKey() {
         return Keys.hmacShaKeyFor(jwtSecret.getBytes());
     }
 
-    public String generateToken(String username, Map<String, Object> claims) {
+    public String generateToken(UserEntity user) {
+        Map<String, Object> claims = JwtUtils.buildClaims(user);
         Instant now = Instant.now();
         return Jwts.builder()
-            .subject(username)
+            .subject(user.getUsername())
             .issuedAt(Date.from(now))
             .expiration(Date.from(now.plus(expirationMinutes, ChronoUnit.MINUTES)))
             .claims(claims)

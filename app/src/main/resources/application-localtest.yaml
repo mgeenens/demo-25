@@ -1,4 +1,4 @@
 app:
   jwt:
-    secret: blahblah
+    secret: 9e+I4Bv5J/VrsCqW9oLVtD6gYfrAjey/mjOFMAWbUog=
     expiration-minutes: 60

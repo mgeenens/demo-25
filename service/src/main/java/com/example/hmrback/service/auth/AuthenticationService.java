@@ -48,7 +48,7 @@ public class AuthenticationService {
         user.getRoles().add(userRole);
         userRepository.save(user);
 
-        String token = jwtService.generateToken(user.getEmail());
+        String token = jwtService.generateToken(user);
         return new AuthResponse(token);
     }
 
@@ -60,7 +60,7 @@ public class AuthenticationService {
         UserEntity user = userRepository.findByEmail(request.email())
             .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
-        String token = jwtService.generateToken(user.getEmail());
+        String token = jwtService.generateToken(user);
         return new AuthResponse(token);
     }
 }
