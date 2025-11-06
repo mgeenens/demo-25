@@ -3,9 +3,12 @@ package com.example.hmrback.utils.test;
 import com.example.hmrback.persistence.entity.*;
 import com.example.hmrback.persistence.enums.IngredientType;
 import com.example.hmrback.persistence.enums.RecipeType;
+import com.example.hmrback.persistence.enums.RoleEnum;
 import com.example.hmrback.persistence.enums.Unit;
 
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.LongStream;
 
@@ -39,6 +42,7 @@ public class EntityTestUtils {
         userEntity.setEmail(EMAIL.formatted(ordinal));
         userEntity.setBirthDate(LocalDate.now().minusYears(10 * ordinal));
         userEntity.setInscriptionDate(LocalDate.now().minusMonths(ordinal));
+        userEntity.setRoles(new HashSet<>(Collections.singleton(buildRoleEntity())));
         return userEntity;
     }
 
@@ -194,5 +198,21 @@ public class EntityTestUtils {
         return LongStream.rangeClosed(1, count)
             .mapToObj(EntityTestUtils::buildRecipeEntity)
             .toList();
+    }
+
+    /**
+     * Builds a RoleEntity instance for testing purposes (ROLE_USER).
+     * <ul>
+     *     <li>Id: ordinal</li>
+     *     <li>Name: from enum</li>
+     * </ul>
+     *
+     * @return RoleEntity instance
+     */
+    public static RoleEntity buildRoleEntity() {
+        RoleEntity entity = new RoleEntity();
+        entity.setId(1L);
+        entity.setName(RoleEnum.ROLE_USER);
+        return entity;
     }
 }

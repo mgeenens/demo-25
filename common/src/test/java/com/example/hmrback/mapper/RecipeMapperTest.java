@@ -26,7 +26,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
     IngredientMapperImpl.class,
     ProductMapperImpl.class,
     StepMapperImpl.class,
-    DateMapperImpl.class
+    DateMapperImpl.class,
+    RoleMapperImpl.class
 })
 class RecipeMapperTest extends BaseTU {
 

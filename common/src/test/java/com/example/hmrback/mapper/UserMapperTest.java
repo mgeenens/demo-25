@@ -18,7 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(classes = {
     UserMapperImpl.class,
-    DateMapperImpl.class
+    DateMapperImpl.class,
+    RoleMapperImpl.class
 })
 class UserMapperTest extends BaseTU {
 

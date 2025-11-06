@@ -3,10 +3,12 @@ package com.example.hmrback.utils.test;
 import com.example.hmrback.model.*;
 import com.example.hmrback.persistence.enums.IngredientType;
 import com.example.hmrback.persistence.enums.RecipeType;
+import com.example.hmrback.persistence.enums.RoleEnum;
 import com.example.hmrback.persistence.enums.Unit;
 import com.example.hmrback.utils.DateUtils;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.LongStream;
@@ -40,7 +42,7 @@ public class ModelTestUtils {
             EMAIL.formatted(ordinal),
             DateUtils.formatLocalDate(LocalDate.now().minusYears(10 * ordinal)),
             DateUtils.formatLocalDate(LocalDate.now().minusMonths(ordinal)),
-            new HashSet<>());
+            new HashSet<>(Collections.singleton(buildRole())));
     }
 
     /**
@@ -148,5 +150,9 @@ public class ModelTestUtils {
             buildUser(ordinal),
             buildIngredientList(5),
             buildStepList(5));
+    }
+
+    public static Role buildRole() {
+        return new Role(1L, RoleEnum.ROLE_USER.toString());
     }
 }
