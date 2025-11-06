@@ -22,7 +22,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
 
         var authorities = user.getRoles().stream()
-            .map(role -> new SimpleGrantedAuthority(role.getName()))
+            .map(role -> new SimpleGrantedAuthority(role.getName().toString()))
             .toList();
 
         return new User(

@@ -112,7 +112,7 @@ class RecipeServiceTest extends BaseTU {
         when(mapper.toEntity(any())).thenReturn(recipeEntity);
         when(mapper.toModel(any())).thenReturn(recipe);
 
-        Recipe result = service.updateRecipe(recipe);
+        Recipe result = service.updateRecipe(NUMBER_1, recipe);
 
         assertNotNull(result);
 

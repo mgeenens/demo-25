@@ -6,10 +6,13 @@ import com.example.hmrback.model.request.RecipeFilter;
 import com.example.hmrback.persistence.entity.RecipeEntity;
 import com.example.hmrback.persistence.repository.RecipeRepository;
 import com.example.hmrback.predicate.factory.RecipePredicateFactory;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,25 +40,27 @@ public class RecipeService {
 
     public Page<Recipe> searchRecipes(RecipeFilter filter, Pageable pageable) {
         if (filter != null) {
-            return recipeRepository.findAll(RecipePredicateFactory.fromFilters(filter), pageable)
-                .map(recipeMapper::toModel);
+            return recipeRepository.findAll(RecipePredicateFactory.fromFilters(filter), pageable).map(recipeMapper::toModel);
         }
         return Page.empty();
     }
 
     @Transactional
+    @PreAuthorize("hasRole('ADMIN') or (hasRole('USER') and @recipeSecurity.isAuthor(#recipeId))")
     public Recipe updateRecipe(
+        @NotNull
+        Long recipeId,
         @Valid
         Recipe recipe) {
-        // TODO: control the user that makes the request
         return recipeMapper.toModel(recipeRepository.saveAndFlush(recipeMapper.toEntity(recipe)));
     }
 
     @Transactional
-    public void deleteRecipe(Long id) {
+    @PreAuthorize("hasRole('ADMIN') or (hasRole('USER') and @recipeSecurity.isAuthor(#recipeId))")
+    public void deleteRecipe(
+        @NotNull
+        Long id) {
         Optional<RecipeEntity> recipeEntity = recipeRepository.findById(id);
-
-        // TODO: control the user that makes the request
         recipeEntity.ifPresent(recipeRepository::delete);
     }
 }

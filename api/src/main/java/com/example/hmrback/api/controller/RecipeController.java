@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import static com.example.hmrback.constant.ControllerConstants.BASE_PATH;
@@ -26,7 +25,10 @@ public class RecipeController {
     }
 
     @PostMapping
-    public ResponseEntity<Recipe> createRecipe(@Valid @RequestBody Recipe recipe) {
+    public ResponseEntity<Recipe> createRecipe(
+        @Valid
+        @RequestBody
+        Recipe recipe) {
         return ResponseEntity.ok(this.recipeService.createRecipe(recipe));
     }
 
@@ -38,20 +40,23 @@ public class RecipeController {
             return ResponseEntity.noContent().build();
         }
 
-        return ResponseEntity.ok()
-            .header("X-Total-Count", String.valueOf(result.getTotalElements()))
-            .body(result);
+        return ResponseEntity.ok().header("X-Total-Count", String.valueOf(result.getTotalElements())).body(result);
     }
 
-    @PutMapping
-    @PreAuthorize("hasRole('ADMIN') or @recipeSecurity.isAuthor(#recipeId, authentication.name)")
-    public ResponseEntity<Recipe> updateRecipe(@Valid @RequestBody Recipe recipe) {
-        return ResponseEntity.ok(this.recipeService.updateRecipe(recipe));
+    @PutMapping("/{id}")
+    public ResponseEntity<Recipe> updateRecipe(
+        @PathVariable
+        Long id,
+        @Valid
+        @RequestBody
+        Recipe recipe) {
+        return ResponseEntity.ok(this.recipeService.updateRecipe(id, recipe));
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN') or @recipeSecurity.isAuthor(#recipeId, authentication.name)")
-    public ResponseEntity<Void> deleteRecipe(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteRecipe(
+        @PathVariable
+        Long id) {
         this.recipeService.deleteRecipe(id);
         return ResponseEntity.noContent().build();
     }
