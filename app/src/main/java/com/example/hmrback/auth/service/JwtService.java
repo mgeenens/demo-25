@@ -22,7 +22,7 @@ public class JwtService {
     private String jwtSecret;
 
     @Value("${app.jwt.expiration-minutes}")
-    private Long expirationMinutes;
+    private String expirationMinutes;
 
     private SecretKey getSigningKey() {
         return Keys.hmacShaKeyFor(jwtSecret.getBytes());
@@ -34,7 +34,7 @@ public class JwtService {
         return Jwts.builder()
             .subject(user.getUsername())
             .issuedAt(Date.from(now))
-            .expiration(Date.from(now.plus(expirationMinutes, ChronoUnit.MINUTES)))
+            .expiration(Date.from(now.plus(Long.parseLong(expirationMinutes), ChronoUnit.MINUTES)))
             .claims(claims)
             .signWith(getSigningKey())
             .compact();

@@ -12,7 +12,6 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,7 +45,6 @@ public class RecipeService {
     }
 
     @Transactional
-    @PreAuthorize("hasRole('ADMIN') or (hasRole('USER') and @recipeSecurity.isAuthor(#recipeId))")
     public Recipe updateRecipe(
         @NotNull
         Long recipeId,
@@ -56,11 +54,12 @@ public class RecipeService {
     }
 
     @Transactional
-    @PreAuthorize("hasRole('ADMIN') or (hasRole('USER') and @recipeSecurity.isAuthor(#recipeId))")
     public void deleteRecipe(
         @NotNull
         Long id) {
         Optional<RecipeEntity> recipeEntity = recipeRepository.findById(id);
-        recipeEntity.ifPresent(recipeRepository::delete);
+        recipeEntity.ifPresentOrElse(recipeRepository::delete, () -> {
+            throw new EntityNotFoundException("Recipe with id %s not found".formatted(id));
+        });
     }
 }

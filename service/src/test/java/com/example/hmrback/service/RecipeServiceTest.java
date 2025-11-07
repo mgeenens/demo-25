@@ -10,6 +10,7 @@ import com.example.hmrback.utils.test.CommonTestUtils;
 import com.example.hmrback.utils.test.EntityTestUtils;
 import com.example.hmrback.utils.test.ModelTestUtils;
 import com.querydsl.core.types.Predicate;
+import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -22,11 +23,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.example.hmrback.utils.test.TestConstants.NUMBER_1;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -119,6 +124,32 @@ class RecipeServiceTest extends BaseTU {
         verify(repository, times(1)).saveAndFlush(any(RecipeEntity.class));
         verify(mapper, times(1)).toEntity(any(Recipe.class));
         verify(mapper, times(1)).toModel(any(RecipeEntity.class));
+    }
+
+    @Test
+    @Order(5)
+    void shouldDeleteRecipe() {
+        when(repository.findById(anyLong())).thenReturn(Optional.ofNullable(recipeEntity));
+        doNothing().when(repository).delete(any(RecipeEntity.class));
+
+        service.deleteRecipe(NUMBER_1);
+
+        verify(repository, times(1)).findById(NUMBER_1);
+        verify(repository, times(1)).delete(any(RecipeEntity.class));
+    }
+
+    @Test
+    @Order(5)
+    void deleteRecipe_whenRecipeNotFound_thenThrowsException() {
+        when(repository.findById(anyLong())).thenReturn(Optional.empty());
+
+        EntityNotFoundException ex = assertThrows(EntityNotFoundException.class, () -> service.deleteRecipe(NUMBER_1));
+
+        assertNotNull(ex);
+        assertEquals("Recipe with id %s not found".formatted(NUMBER_1), ex.getMessage());
+
+        verify(repository, times(1)).findById(NUMBER_1);
+        verify(repository, times(0)).delete(any(RecipeEntity.class));
     }
 
 }
