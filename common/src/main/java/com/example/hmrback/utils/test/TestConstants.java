@@ -9,7 +9,7 @@ public class TestConstants {
 
     public static final String FIRST_NAME = "fName %s";
     public static final String LAST_NAME = "lName %s";
-    public static final String USERNAME = "username %s";
+    public static final String USERNAME = "username%s";
     public static final String EMAIL = "email.%s@test.com";
 
     public static final String PRODUCT_NAME = "Product %s";

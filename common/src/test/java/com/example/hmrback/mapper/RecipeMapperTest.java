@@ -57,7 +57,7 @@ class RecipeMapperTest extends BaseTU {
         assertEquals(NUMBER_1, result.id());
         assertEquals(RECIPE_TITLE.formatted(NUMBER_1), result.title());
         assertEquals(RECIPE_DESCRIPTION.formatted(NUMBER_1), result.description());
-        assertEquals(RecipeType.ENTRY, result.recipeType());
+        assertEquals(RecipeType.STARTER, result.recipeType());
         assertNotNull(result.author());
         assertNotNull(result.ingredientList());
         assertFalse(result.ingredientList().isEmpty());
@@ -75,7 +75,7 @@ class RecipeMapperTest extends BaseTU {
         assertEquals(NUMBER_1, result.getId());
         assertEquals(RECIPE_TITLE.formatted(NUMBER_1), result.getTitle());
         assertEquals(RECIPE_DESCRIPTION.formatted(NUMBER_1), result.getDescription());
-        assertEquals(RecipeType.ENTRY, result.getRecipeType());
+        assertEquals(RecipeType.STARTER, result.getRecipeType());
         assertNotNull(result.getAuthor());
         assertNotNull(result.getIngredientList());
         assertFalse(result.getIngredientList().isEmpty());

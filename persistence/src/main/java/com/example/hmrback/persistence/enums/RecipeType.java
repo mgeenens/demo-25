@@ -6,7 +6,7 @@ import java.util.List;
 
 @Getter
 public enum RecipeType {
-    ENTRY("Entrée"),
+    STARTER("Entrée"),
     MAIN_COURSE("Plat principal"),
     DESSERT("Dessert"),
     BEVERAGE("Boisson"),

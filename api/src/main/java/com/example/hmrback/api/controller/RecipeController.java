@@ -33,7 +33,7 @@ public class RecipeController {
         return ResponseEntity.ok(this.recipeService.createRecipe(recipe));
     }
 
-    @GetMapping("/recipes")
+    @GetMapping
     public ResponseEntity<Page<Recipe>> searchRecipes(RecipeFilter filter, Pageable pageable) {
         Page<Recipe> result = this.recipeService.searchRecipes(filter, pageable);
 

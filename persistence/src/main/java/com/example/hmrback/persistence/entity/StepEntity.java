@@ -22,7 +22,7 @@ public class StepEntity {
     @Column(name = "DESCRIPTION", length = 2000, nullable = false)
     private String description;
 
-    @Column(name = "ORDER", nullable = false)
+    @Column(name = "STEP_ORDER", nullable = false)
     private Integer order;
 
     @ManyToOne
