@@ -5,8 +5,10 @@ import com.example.hmrback.mapper.config.GlobalMapperConfig;
 import com.example.hmrback.mapper.utils.DateMapper;
 import com.example.hmrback.model.Recipe;
 import com.example.hmrback.persistence.entity.RecipeEntity;
+import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 import java.util.List;
 
@@ -29,4 +31,16 @@ public interface RecipeMapper extends BaseMapper<Recipe, RecipeEntity> {
     RecipeEntity toEntity(Recipe model);
 
     List<Recipe> toModelList(List<RecipeEntity> entities);
+
+    @AfterMapping
+    default void linkChildren(
+        @MappingTarget
+        RecipeEntity recipeEntity) {
+        if (recipeEntity.getIngredientList() != null) {
+            recipeEntity.getIngredientList().forEach(i -> i.setRecipe(recipeEntity));
+        }
+        if (recipeEntity.getStepList() != null) {
+            recipeEntity.getStepList().forEach(s -> s.setRecipe(recipeEntity));
+        }
+    }
 }

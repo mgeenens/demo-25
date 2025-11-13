@@ -1,6 +1,5 @@
-package com.example.hmrback.service.auth;
+package com.example.hmrback.auth.service;
 
-import com.example.hmrback.auth.service.JwtService;
 import com.example.hmrback.mapper.UserMapper;
 import com.example.hmrback.model.request.AuthRequest;
 import com.example.hmrback.model.request.RegisterRequest;

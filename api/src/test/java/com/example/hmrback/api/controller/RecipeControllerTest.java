@@ -1,14 +1,14 @@
 package com.example.hmrback.api.controller;
 
 import com.example.hmrback.auth.service.JwtService;
-import com.example.hmrback.model.Recipe;
-import com.example.hmrback.persistence.entity.RecipeEntity;
-import com.example.hmrback.persistence.entity.RoleEntity;
-import com.example.hmrback.persistence.entity.UserEntity;
+import com.example.hmrback.persistence.entity.*;
 import com.example.hmrback.persistence.enums.RoleEnum;
-import com.example.hmrback.persistence.repository.RecipeRepository;
-import com.example.hmrback.persistence.repository.UserRepository;
+import com.example.hmrback.persistence.repository.*;
+import com.example.hmrback.utils.test.CommonTestUtils;
 import com.example.hmrback.utils.test.EntityTestUtils;
+import com.example.hmrback.utils.test.IntegrationTestUtils;
+import com.example.hmrback.utils.test.ModelTestUtils;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -20,10 +20,14 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Set;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -41,10 +45,8 @@ class RecipeControllerTest {
 
     @Autowired
     private RecipeRepository recipeRepository;
-
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -53,7 +55,23 @@ class RecipeControllerTest {
     private String otherToken;
     private RecipeEntity recipeEntity;
 
-    private static Recipe recipeRequest; // TODO dans BefaoreAll + ObjectMapper -> class IntegrationTestUtils
+    private static String updateRecipeRequest;
+    private static String createRecipeRequest;
+    private static String nonExistingRecipeFilters;
+
+    @Autowired
+    private StepRepository stepRepository;
+    @Autowired
+    private ProductRepository productRepository;
+    @Autowired
+    private IngredientRepository ingredientRepository;
+
+    @BeforeAll
+    static void initAll() throws JsonProcessingException {
+        updateRecipeRequest = IntegrationTestUtils.toJson(ModelTestUtils.buildRecipe(1L, false));
+        createRecipeRequest = IntegrationTestUtils.toJson(ModelTestUtils.buildRecipe(1L, true));
+        nonExistingRecipeFilters = IntegrationTestUtils.toJson(CommonTestUtils.buildRecipeFilter());
+    }
 
     @BeforeEach
     void setup() {
@@ -76,6 +94,14 @@ class RecipeControllerTest {
         otherUser.setRoles(Set.of(new RoleEntity(1L, RoleEnum.ROLE_USER)));
         userRepository.save(otherUser);
 
+        // Fill Up the H2 DB
+        List<StepEntity> stepList = EntityTestUtils.buildStepEntityList(5);
+        List<ProductEntity> productEntityList = EntityTestUtils.buildProductEntityList(4);
+        List<IngredientEntity> ingredientEntityList = EntityTestUtils.buildIngredientEntityList(4);
+        stepRepository.saveAll(stepList);
+        productRepository.saveAll(productEntityList);
+        ingredientRepository.saveAll(ingredientEntityList);
+
         // Generate JWT tokens for them
         adminToken = jwtService.generateToken(admin);
         userToken = jwtService.generateToken(user);
@@ -87,16 +113,14 @@ class RecipeControllerTest {
         recipeRepository.save(recipeEntity);
     }
 
-    // TODO: other tests
-
     @Test
     @Order(1)
-    @WithMockUser(username = "admin", roles = {"ADMIN"})
+    @WithMockUser(username = "admin", roles = { "ADMIN" })
     void updateRecipe_AsAdmin_ShouldSucceed() throws Exception {
         mockMvc.perform(put("/hmr/api/recipes/" + recipeEntity.getId())
                 .header("Authorization", "Bearer " + adminToken)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"title\": \"Updated by Admin\"}"))
+                .content(updateRecipeRequest))
             .andExpect(status().isOk());
     }
 
@@ -107,7 +131,7 @@ class RecipeControllerTest {
         mockMvc.perform(put("/hmr/api/recipes/" + recipeEntity.getId())
                 .header("Authorization", "Bearer " + userToken)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"title\": \"Updated by Author\"}"))
+                .content(updateRecipeRequest))
             .andExpect(status().isOk());
     }
 
@@ -118,7 +142,7 @@ class RecipeControllerTest {
         mockMvc.perform(put("/hmr/api/recipes/" + recipeEntity.getId())
                 .header("Authorization", "Bearer " + otherToken)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"title\": \"Malicious Update\"}"))
+                .content(updateRecipeRequest))
             .andExpect(status().isForbidden());
     }
 
@@ -139,5 +163,46 @@ class RecipeControllerTest {
                 .header("Authorization", "Bearer " + otherToken))
             .andExpect(status().isForbidden());
     }
+
+    @Test
+    @Order(6)
+    @WithMockUser(username = "username1")
+    void createRecipe() throws Exception {
+        mockMvc.perform(post("/hmr/api/recipes")
+                .header("Authorization", "Bearer " + userToken)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(createRecipeRequest))
+            .andExpect(status().isOk());
+    }
+
+    @Test
+    @Order(7)
+    @WithMockUser(username = "username1")
+    void searchRecipes_withNoRecipesFound() throws Exception {
+        mockMvc.perform(post("/hmr/api/recipes/search")
+                .header("Authorization", "Bearer " + userToken)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(nonExistingRecipeFilters)
+                .param("page", "0")
+                .param("size", "10")
+                .param("sort", "title,asc"))
+            .andExpect(status().isNoContent());
+    }
+// TODO : with existing recipe in H2
+//    @Test
+//    @Order(7)
+//    @WithMockUser(username = "username1")
+//    void searchRecipes_withNoRecipesFound() throws Exception {
+//        mockMvc.perform(post("/hmr/api/recipes/search")
+//                .header("Authorization", "Bearer " + userToken)
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .content(recipeFilters)
+//                .param("page", "0")
+//                .param("size", "10")
+//                .param("sort", "title,asc"))
+//            .andExpect(status().isOK())
+//            .andExpect(header().exists("X-Total-Count"))
+//            .andExpect(jsonPath("$.content").isArray());
+//    }
 
 }

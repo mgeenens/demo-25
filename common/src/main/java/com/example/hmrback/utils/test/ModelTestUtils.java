@@ -94,8 +94,8 @@ public class ModelTestUtils {
      * @param ordinal the ordinal to differentiate steps
      * @return the Step object
      */
-    public static Step buildStep(Long ordinal) {
-        return new Step(ordinal, STEP_DESCRIPTION.formatted(ordinal), ordinal.intValue());
+    public static Step buildStep(Long ordinal, boolean isCreation) {
+        return new Step(isCreation ? null : ordinal, STEP_DESCRIPTION.formatted(ordinal), ordinal.intValue());
     }
 
     /**
@@ -104,8 +104,8 @@ public class ModelTestUtils {
      * @param count the number of steps to create
      * @return the list of Step objects
      */
-    public static List<Step> buildStepList(int count) {
-        return LongStream.rangeClosed(1L, count).mapToObj(ModelTestUtils::buildStep).toList();
+    public static List<Step> buildStepList(int count, boolean isCreation) {
+        return LongStream.rangeClosed(1L, count).mapToObj(num -> ModelTestUtils.buildStep(num, isCreation)).toList();
     }
 
     /**
@@ -120,8 +120,8 @@ public class ModelTestUtils {
      * @param ordinal the ordinal to differentiate ingredients
      * @return the Ingredient object
      */
-    public static Ingredient buildIngredient(Long ordinal) {
-        return new Ingredient(ordinal,
+    public static Ingredient buildIngredient(Long ordinal, boolean isCreation) {
+        return new Ingredient(isCreation ? null : ordinal,
             ordinal.doubleValue() * 10,
             Unit.getByIndex(ordinal.intValue() - 1),
             buildProduct(ordinal));
@@ -133,23 +133,23 @@ public class ModelTestUtils {
      * @param count the number of ingredients to create
      * @return the list of Ingredient objects
      */
-    public static List<Ingredient> buildIngredientList(int count) {
+    public static List<Ingredient> buildIngredientList(int count, boolean isCreation) {
         if (count > Unit.values().length) {
             count = Unit.values().length;
         }
-        return LongStream.rangeClosed(1L, count).mapToObj(ModelTestUtils::buildIngredient).toList();
+        return LongStream.rangeClosed(1L, count).mapToObj(num -> ModelTestUtils.buildIngredient(num, isCreation)).toList();
     }
 
     public static Recipe buildRecipe(Long ordinal, boolean isCreation) {
-        return new Recipe(isCreation ? null :ordinal,
+        return new Recipe(isCreation ? null : ordinal,
             RECIPE_TITLE.formatted(ordinal),
             RECIPE_DESCRIPTION.formatted(ordinal),
             ordinal.intValue() * 40,
             RecipeType.getByIndex(ordinal.intValue() - 1),
             DateUtils.formatLocalDate(LocalDate.now().minusDays(10 * ordinal)),
             buildUser(ordinal),
-            buildIngredientList(5),
-            buildStepList(5));
+            buildIngredientList(4, isCreation),
+            buildStepList(5, isCreation));
     }
 
     public static Role buildRole() {

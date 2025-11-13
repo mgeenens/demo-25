@@ -47,7 +47,7 @@ public class UserEntity {
     private String password;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RecipeEntity> recipes = new ArrayList<>();
+    private List<RecipeEntity> recipes;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "USER_ROLE",

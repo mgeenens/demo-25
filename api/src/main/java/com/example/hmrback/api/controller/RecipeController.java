@@ -4,6 +4,7 @@ import com.example.hmrback.model.Recipe;
 import com.example.hmrback.model.request.RecipeFilter;
 import com.example.hmrback.service.RecipeService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,8 +34,11 @@ public class RecipeController {
         return ResponseEntity.ok(this.recipeService.createRecipe(recipe));
     }
 
-    @GetMapping
-    public ResponseEntity<Page<Recipe>> searchRecipes(RecipeFilter filter, Pageable pageable) {
+    @PostMapping("/search")
+    public ResponseEntity<Page<Recipe>> searchRecipes(
+        @RequestBody
+        @NotNull
+        RecipeFilter filter, Pageable pageable) {
         Page<Recipe> result = this.recipeService.searchRecipes(filter, pageable);
 
         if (result.isEmpty()) {

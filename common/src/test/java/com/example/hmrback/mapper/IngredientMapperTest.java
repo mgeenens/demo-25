@@ -33,7 +33,7 @@ class IngredientMapperTest extends BaseTU {
         // UserEntity
         entity = EntityTestUtils.buildIngredientEntity(NUMBER_1);
         // User
-        model = ModelTestUtils.buildIngredient(NUMBER_1);
+        model = ModelTestUtils.buildIngredient(NUMBER_1, false);
     }
 
     @Test

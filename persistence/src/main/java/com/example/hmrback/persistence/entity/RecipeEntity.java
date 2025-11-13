@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -40,10 +41,10 @@ public class RecipeEntity {
     private LocalDate publicationDate;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<IngredientEntity> ingredientList;
+    private List<IngredientEntity> ingredientList = new ArrayList<>();;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<StepEntity> stepList;
+    private List<StepEntity> stepList = new ArrayList<>();;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID", nullable = false)

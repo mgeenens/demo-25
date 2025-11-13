@@ -3,7 +3,7 @@ package com.example.hmrback.api.controller;
 import com.example.hmrback.model.request.AuthRequest;
 import com.example.hmrback.model.request.RegisterRequest;
 import com.example.hmrback.model.response.AuthResponse;
-import com.example.hmrback.service.auth.AuthenticationService;
+import com.example.hmrback.auth.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

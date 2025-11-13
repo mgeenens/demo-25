@@ -30,7 +30,7 @@ class StepMapperTest extends BaseTU {
         // UserEntity
         entity = EntityTestUtils.buildStepEntity(NUMBER_1);
         // User
-        model = ModelTestUtils.buildStep(NUMBER_1);
+        model = ModelTestUtils.buildStep(NUMBER_1, false);
     }
 
     @Test
